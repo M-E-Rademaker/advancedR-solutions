@@ -3,6 +3,7 @@ title: "Solutions to Chapter 2"
 author: "Manuel Steiner"
 output:
   md_document:
+    variant: markdown_github
     toc: yes
     toc_depth: 4
   html_document:

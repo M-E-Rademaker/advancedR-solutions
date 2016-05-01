@@ -1,6 +1,6 @@
 Solutions to Chapter 6
 ================
-Manuel Steiner
+01 Mai, 2016
 
 -   [6.1.2 Exercise](#exercise)
 -   [6.2.5 Exercise](#exercise-1)
@@ -195,7 +195,7 @@ head(objs, 2)
     ##         stop("can only subtract numbers from \"Date\" objects")
     ##     structure(unclass(as.Date(e1)) - e2, class = "Date")
     ## }
-    ## <bytecode: 0x0000000015ebc9a8>
+    ## <bytecode: 0x0000000015e772b8>
     ## <environment: namespace:base>
 
 The function `Filter(f, x, ...)` extracts the elements of a vector `x` for which the logical function `f` return `TRUE`. Therefore the following code chunk checks each element of `objs` whether it is a function returning its value if the condition is `TRUE`.
@@ -270,7 +270,7 @@ mean ## from the base package
 
     ## function (x, ...) 
     ## UseMethod("mean")
-    ## <bytecode: 0x0000000015b46170>
+    ## <bytecode: 0x00000000159be468>
     ## <environment: namespace:base>
 
 ``` r

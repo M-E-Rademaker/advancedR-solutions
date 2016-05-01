@@ -1,6 +1,6 @@
 Solutions to Chapter 2
 ================
-Manuel Steiner
+01 Mai, 2016
 
 -   [2.1.3 Exercise](#exercise)
 

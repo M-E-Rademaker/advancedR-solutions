@@ -1,6 +1,6 @@
 Solutions to Chapter 13
 ================
-Manuel Steiner
+01 Mai, 2016
 
 -   [13.1.1 Exercises](#exercises)
 
@@ -77,7 +77,7 @@ as.Date.default
     ##     stop(gettextf("do not know how to convert '%s' to class %s", 
     ##         deparse(substitute(x)), dQuote("Date")), domain = NA)
     ## }
-    ## <bytecode: 0x0000000015c5bb50>
+    ## <bytecode: 0x0000000015cd7208>
     ## <environment: namespace:base>
 
 The function uses `substitute()` and `deparse()` to print a meaningful error message

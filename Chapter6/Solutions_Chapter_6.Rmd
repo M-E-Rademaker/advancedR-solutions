@@ -1,6 +1,6 @@
 ---
 title: "Solutions to Chapter 6"
-author: "Manuel Steiner"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: 
   github_document: 
     toc: yes

@@ -1,3 +1,7 @@
+Solutions to Chapter 2
+================
+Manuel Steiner
+
 -   [2.1.3 Exercise](#exercise)
 
 2.1.3 Exercise

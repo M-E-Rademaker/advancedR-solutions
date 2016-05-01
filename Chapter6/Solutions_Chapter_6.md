@@ -1,3 +1,7 @@
+Solutions to Chapter 6
+================
+Manuel Steiner
+
 -   [6.1.2 Exercise](#exercise)
 -   [6.2.5 Exercise](#exercise-1)
 -   [6.4.6 Exercise](#exercise-2)
@@ -65,9 +69,9 @@ funs <- Filter(is.function, objs)
 ```
 
 > Use it to answer the following questions:
->  a. Which base function has the most arguments?
->  b. How many base functions have no arguments? What's special about those functions?
->  c. How could you adapt the code to find all primitive functions?
+> a. Which base function has the most arguments?
+> b. How many base functions have no arguments? What's special about those functions?
+> c. How could you adapt the code to find all primitive functions?
 
 Lets first understand what the code does. The function `ls()` with no argument return a list of all objects currently stored in the global environment. If given a specific environment or the name of an element in the search path (accesible with `search()`) the function returns all objects found in that specifc environment or search path element. Using `search()` gives the following elements in the search path
 
@@ -191,7 +195,7 @@ head(objs, 2)
     ##         stop("can only subtract numbers from \"Date\" objects")
     ##     structure(unclass(as.Date(e1)) - e2, class = "Date")
     ## }
-    ## <bytecode: 0x0000000008552dd8>
+    ## <bytecode: 0x0000000015ebc9a8>
     ## <environment: namespace:base>
 
 The function `Filter(f, x, ...)` extracts the elements of a vector `x` for which the logical function `f` return `TRUE`. Therefore the following code chunk checks each element of `objs` whether it is a function returning its value if the condition is `TRUE`.
@@ -266,7 +270,7 @@ mean ## from the base package
 
     ## function (x, ...) 
     ## UseMethod("mean")
-    ## <bytecode: 0x0000000007e861d8>
+    ## <bytecode: 0x0000000015b46170>
     ## <environment: namespace:base>
 
 ``` r
@@ -464,9 +468,3 @@ f3()
 --------------
 
 > **Question 1**: Create a list of all replacement functions found in the base package. Which ones are primitive functions?
-
-funs &lt;- mget(ls("package:base"), inherits = TRUE) repl\_funs &lt;- funs\[grepl("^(.\*?)&lt;-$", names(funs))\] ?grepl names(funs)
-
-funs grepl("&lt;-$", names(funs)) head(funs)
-
-require(pryr) find\_funs("package:base", fun\_body, pattern = "as.data.frame", fixed = TRUE) mem\_used() ?cor

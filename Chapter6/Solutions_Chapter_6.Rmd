@@ -1,15 +1,8 @@
 ---
 title: "Solutions to Chapter 6"
 author: "Manuel Steiner"
-output:
-  md_document:
-    variant: markdown_github
-    toc: yes
-    toc_depth: 4
-  pdf_document:
-    toc: yes
-    toc_depth: 4
-  html_document:
+output: 
+  github_document: 
     toc: yes
     toc_depth: 4
 ---
@@ -411,16 +404,3 @@ f3()
  > **Question 1**: Create a list of all replacement functions found in the base package. 
    Which ones are primitive functions?
 
-funs <- mget(ls("package:base"), inherits = TRUE)
-repl_funs <- funs[grepl("^(.*?)<-$", names(funs))]
-?grepl
-names(funs)
-
-funs
-grepl("<-$", names(funs))
-head(funs)
-
-require(pryr)
-find_funs("package:base", fun_body, pattern = "as.data.frame", fixed = TRUE)
-mem_used()
-?cor

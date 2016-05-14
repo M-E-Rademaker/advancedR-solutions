@@ -3,6 +3,7 @@ title: "Solutions to Chapter 6"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: 
   github_document: 
+    hard_line_break: false
     toc: yes
     toc_depth: 4
 ---
@@ -22,18 +23,16 @@ The function `is.function(x)` checks if `x` is a function, primitive or any othe
 ```{r}
 testfunc <- function(a) 1 + a
 typeof(testfunc); is.function(testfunc)
-# For a primitive function:
-typeof(sum); is.function(sum)
 ```
 
 The function `is.primitive(x)` returns `TRUE` if and only if `x` is a primitive 
-function (one of "builtin" or "special"). It returns `FALSE` otherwise
+function (one of "builtin" or "special"). It returns `FALSE` otherwise.
 
 ```{r}
-typeof(sum) # a primitive
-is.primitive(sum)
-typeof(testfunc) # not of type builtin or special
-is.primitive(testfunc) # not a primitive
+# A primitive:
+typeof(sum); is.primitive(sum)
+# Not a primitive (not of type "builtin"" or "special"):
+typeof(testfunc); is.primitive(testfunc)
 ```
 
 ********************************************************************************
@@ -46,7 +45,7 @@ funs <- Filter(is.function, objs)
 ```
 
  > Use it to answer the following questions:  
- a. Which base function has the most arguments?    
+ a. Which base function has the most arguments?  
  b. How many base functions have no arguments? What's special about those functions?  
  c. How could you adapt the code to find all primitive functions?  
  

@@ -25,7 +25,7 @@ g(a + b + c + d + e + f + g + h + i + j + k + l + m + n + o + p + q + r + s + t
 > Why does this happen? Carefully read the documentation. Can you write a wrapper
 around `deparse()` so that it always returns a single string?
 
-The documentation tells us that the default behaviour of deparse is to try and
+The documentation tells us that the default behaviour of `deparse` is to try and
 break the expression to deparse into seperate strings if the output is longer than
 `width.cutoff = 60` **bytes**. In the above case:
 ```{r}
@@ -35,13 +35,13 @@ g(a + b + c + d + e + f + g + h + i + j + k + l + m + n + o + p + q + r + s + t
   + u + v + w + x + y + z)
 ```
 
-To find out the number of bytes a given expression contains we use (see [this](http://stackoverflow.com/questions/36969133/what-does-ncharsubstitutea-b-c-actually-count/36969146?noredirect=1#comment61494207_36969146) StackOverflow question)
+To find out the number of bytes a given expression contains we can use (see [this](http://stackoverflow.com/questions/36969133/what-does-ncharsubstitutea-b-c-actually-count/36969146?noredirect=1#comment61494207_36969146) StackOverflow question):
 ```{r}
 sum(nchar(substitute(a + b + c + d + e + f + g + h + i + j + k + l + m + n + o 
                      + p + q + r + s + t + u + v + w + x + y + z), type = "bytes"))
 ```
 
-So if we set `width.cutoff = 100` the output wont be split
+So if we set `width.cutoff = 100` the output will not be split:
 
 ```{r}
 deparse(substitute(a + b + c + d + e + f + g + h + i + j + k + l + m + n + o 
@@ -69,7 +69,7 @@ Why does `pairwise.t.test()` use them?´Read the source code.
 as.Date.default
 ```
 The function uses `substitute()` and `deparse()` to print a meaningful
-error message
+error message.
 ```{r error=TRUE}
 as.Date.default("abc")
 ```
@@ -96,11 +96,24 @@ will the following code return? First make a prediction. Then run the code and
 think about the results.
 
 ```{r}
-f <- function(x, y) substitute(x)
-g <- function(x) deparse(f(x))
+f <- function(x) substitute(x)
+g <- function(y) deparse(f(y))
 g(1:10) 
 g(x) 
 g(x + y^2 / z + exp(a * sin(b))) 
+```
+
+```{r}
+deparse(f(mean(x)))
+deparse(substitute(mean(x)))
+f1 <- function(y) {
+  f(a)
+}
+a <- 1:10
+g1 <- function(y) f1(y)
+g1(1:10)
+g2 <- function(y) substitute(y)
+
 ```
 
 

@@ -508,5 +508,40 @@ x
   `in_dir()` Why might you prefer one approach to the other?
   
 ```{r}
-source()
+in_dir <- function(dir, code) {
+  old <- setwd(dir)
+  on.exit(setwd(old))
+  
+  force(code)
+}
+in_dir("~", getwd())
+getwd()
 ```
+Couple of comments
+
+1.  The "`~`" sign sets the working directory to the home directory.
+1.  `setwd()` silently returns the old working directory before changing it! This
+    is why we can assign the old working path to `old` while setting it.
+    
+```{r}
+old <- setwd("C:/Users/Manuel/Documents/GitHub/")
+old
+getwd()
+```
+
+To the question: Looking at the source code the relevant part is
+
+```{r eval = FALSE}
+owd <- getwd()
+if (is.null(owd)) 
+  stop("cannot 'chdir' as current directory is unknown")
+on.exit(setwd(owd), add = TRUE)
+setwd(path)
+```
+
+The difference is that `source()` explicitly uses the output of `getwd()` while
+`setwd()` uses the old working directory implicitely by assigning the invisible 
+output of `setwd()` (the old working directory).
+
+> **Question 2**: What function undoes the action of `library()`? How do you save
+and restore the values of `options()` and `par()`?

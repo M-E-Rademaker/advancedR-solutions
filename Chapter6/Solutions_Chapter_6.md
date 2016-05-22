@@ -1,11 +1,12 @@
 Solutions to Chapter 6
 ================
-15 Mai, 2016
+22 Mai, 2016
 
 -   [6.1.2 Exercise](#exercise)
 -   [6.2.5 Exercise](#exercise-1)
 -   [6.4.6 Exercise](#exercise-2)
 -   [6.5.3 Exercise](#exercise-3)
+-   [6.6.2 Exercise](#exercise-4)
 
 6.1.2 Exercise
 --------------
@@ -205,7 +206,7 @@ head(objs, 2)
     ##         stop("can only subtract numbers from \"Date\" objects")
     ##     structure(unclass(as.Date(e1)) - e2, class = "Date")
     ## }
-    ## <bytecode: 0x0000000017cc3310>
+    ## <bytecode: 0x0000000017d29a80>
     ## <environment: namespace:base>
 
 The function `Filter(f, x, ...)` extracts the elements of a vector `x`
@@ -310,7 +311,7 @@ mean # from the base package
 
     ## function (x, ...) 
     ## UseMethod("mean")
-    ## <bytecode: 0x0000000018215ec0>
+    ## <bytecode: 0x0000000018276720>
     ## <environment: namespace:base>
 
 ``` r
@@ -715,7 +716,68 @@ x
 ```
 
     ## $`Modified version`
-    ##  [1]  1  2  3  4  3  6  7  8  9 10
+    ##  [1]  1  2  3  3  5  6  7  8  9 10
     ## 
     ## $Change
-    ## [1] "Entry 5 was changed to 3"
+    ## [1] "Entry 4 was changed to 3"
+
+6.6.2 Exercise
+--------------
+
+> **Question 1**: How does the `chdir` parameter of `source()` compare
+> to `in_dir()` Why might you prefer one approach to the other?
+
+``` r
+in_dir <- function(dir, code) {
+  old <- setwd(dir)
+  on.exit(setwd(old))
+  
+  force(code)
+}
+in_dir("~", getwd())
+```
+
+    ## [1] "C:/Users/Manuel/Documents"
+
+``` r
+getwd()
+```
+
+    ## [1] "C:/Users/Manuel/Documents/GitHub/advancedR-solutions/Chapter6"
+
+Couple of comments
+
+1.  The "`~`" sign sets the working directory to the home directory.
+2.  `setwd()` silently returns the old working directory before changing
+    it! This is why we can assign the old working path to `old` while
+    setting it.
+
+``` r
+old <- setwd("C:/Users/Manuel/Documents/GitHub/")
+old
+```
+
+    ## [1] "C:/Users/Manuel/Documents/GitHub/advancedR-solutions/Chapter6"
+
+``` r
+getwd()
+```
+
+    ## [1] "C:/Users/Manuel/Documents/GitHub"
+
+To the question: Looking at the source code the relevant part is
+
+``` r
+owd <- getwd()
+if (is.null(owd)) 
+  stop("cannot 'chdir' as current directory is unknown")
+on.exit(setwd(owd), add = TRUE)
+setwd(path)
+```
+
+The difference is that `source()` explicitly uses the output of
+`getwd()` while `setwd()` uses the old working directory implicitely by
+assigning the invisible output of `setwd()` (the old working directory).
+
+> **Question 2**: What function undoes the action of `library()`? How do
+> you save and restore the values of `options()` and `par()`?
